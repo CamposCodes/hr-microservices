@@ -1,0 +1,28 @@
+name: Verifica resumo da aula
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-resumo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Confere resumos/numero.md
+        run: |
+          NUM=$(echo "${{ github.head_ref }}" | grep -oE '^[0-9]+' || true)
+          if [ -z "$NUM" ]; then
+            echo "Branch fora do padrao numero-..., pulando checagem."
+            exit 0
+          fi
+          FILE="resumos/$NUM.md"
+          if git diff --name-only "origin/${{ github.base_ref }}" HEAD | grep -qx "$FILE"; then
+            echo "OK: $FILE presente."
+          else
+            echo "Faltando $FILE, adicione o resumo da aula antes de mergear."
+            exit 1
+          fi
