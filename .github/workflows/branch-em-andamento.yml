@@ -17,7 +17,7 @@ jobs:
             echo "Branch '${{ github.event.ref }}' nao comeca com numero de issue, ignorando."
             exit 0
           fi
-          ITEM_ID=$(gh project item-list 4 --owner CamposCodes --format json -L 100 \
+          ITEM_ID=$(gh project item-list 4 --owner "@me" --format json -L 100 \
             -q ".items[] | select(.content.number == $NUM) | .id")
           if [ -z "$ITEM_ID" ]; then
             echo "Issue #$NUM nao esta no Project, ignorando."
