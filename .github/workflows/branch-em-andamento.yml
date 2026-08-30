@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Move a issue pra Em Andamento
         env:
-          GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+          GH_TOKEN: ${{ secrets.PROJECTS_TOKEN_WORKFLOW }}
         run: |
           NUM=$(echo "${{ github.event.ref }}" | grep -oE '^[0-9]+' || true)
           if [ -z "$NUM" ]; then
