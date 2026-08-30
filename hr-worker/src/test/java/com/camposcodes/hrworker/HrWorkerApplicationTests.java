@@ -1,4 +1,4 @@
-package com.devsuperior.hrworker;
+package com.camposcodes.hrworker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
