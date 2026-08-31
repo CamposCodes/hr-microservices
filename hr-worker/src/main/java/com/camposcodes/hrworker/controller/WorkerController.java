@@ -24,7 +24,7 @@ public class WorkerController {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(value="{id}")
+    @GetMapping(value="/{id}")
     public ResponseEntity<Worker> findById(@PathVariable Long id){
         Worker worker = workerService.findById(id);
         return ResponseEntity.ok(worker);
