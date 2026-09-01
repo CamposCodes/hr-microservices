@@ -19,6 +19,14 @@ public class WorkerService {
     }
 
     public Worker findById(Long id){
+
+        /* Teste de timeout - hystrix
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} */
+
         return workerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Trabalhador não encontrado, id: " + id + " - Worker not found, id: " + id));
     }
