@@ -3,6 +3,7 @@ package com.camposcodes.hrworker.controller;
 import com.camposcodes.hrworker.entity.Worker;
 import com.camposcodes.hrworker.repository.WorkerRepository;
 import com.camposcodes.hrworker.service.WorkerService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +21,20 @@ public class WorkerController {
 
     private static Logger logger = LoggerFactory.getLogger(WorkerController.class);
 
+    @Value("${test.config}")
+    private String testConfig;
+
     @Autowired
     private Environment env;
 
     @Autowired
     private WorkerService workerService;
+
+    @GetMapping(value="/configs")
+    public ResponseEntity<Void> config(){
+        logger.info("config = " + testConfig);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping
     public ResponseEntity<List<Worker>> findAll(){
